@@ -17,7 +17,6 @@ class FigureType extends AbstractType
             ->add('family')
             ->add('pictures')
             ->add('videos')
-            ->add('slug')
         ;
     }
 
