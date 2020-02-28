@@ -29,7 +29,7 @@
                 <td>{{ figure.videos ? figure.videos|join(', ') : '' }}</td>
                 <td>{{ figure.slug }}</td>
                 <td>
-                    <a href="{{ path('figure_show', {'id': figure.id}) }}">show</a>
+                    <a href="{{ path('figure_show', {'slug': figure.slug}) }}">show</a>
                     <a href="{{ path('figure_edit', {'id': figure.id}) }}">edit</a>
                 </td>
             </tr>
