@@ -124,4 +124,9 @@ class Figure
 
         return $this;
     }
+    
+    public function sluggify(SluggerInterface $slugger)
+    {
+        $this->slug = (string) $slugger->slug((string) $this)->lower();
+    }
 }
