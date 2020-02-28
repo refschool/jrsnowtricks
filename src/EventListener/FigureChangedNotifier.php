@@ -6,11 +6,22 @@ use App\Entity\Figure;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class FigureChangedNotifier
+class FigureEntityListener
 {
-    public function prePersist(Figure $figure, SluggerInterface $slugger): void
+    private $slugger;
+    
+    public function __construct(SluggerInterface $slugger)
     {
-        dump("toto");
-        $figure->setSlug((string) $slugger->slug((string) $this->getName())->lower());
+        $this->slugger = $slugger;
+    }
+    
+    public function prePersist(Figure $figure, LifecycleEventArgs $event)
+    {
+        $figure->sluggify($this->slugger);
+    }
+    
+    public function preUpdate(Figure $figure, LifecycleEventArgs $event)
+    {
+        $figure->sluggify($this->slugger);
     }
 }
