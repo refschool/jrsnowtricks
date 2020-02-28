@@ -49,7 +49,7 @@ class FigureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="figure_show", methods={"GET"})
+     * @Route("/{slug}", name="figure_show", methods={"GET"})
      */
     public function show(Figure $figure): Response
     {
