@@ -25,7 +25,7 @@
                 <td>{{ figure.name }}</td>
                 <td>{{ figure.description }}</td>
                 <td>{{ figure.family }}</td>
-                <td>{{ figure.pictures ? figure.pictures|join(', ') : '' }}</td>
+                <td>{{ figure.pictures ? figure.pictures|length : '0' }}</td>
                 <td>{{ figure.videos ? figure.videos|join(', ') : '' }}</td>
                 <td>{{ figure.slug }}</td>
                 <td>

@@ -98,6 +98,13 @@ class Figure
         return $this->pictures;
     }
 
+    public function addPicture(string $fileName): self
+    {
+        $this->pictures[] = $fileName;
+
+        return $this;
+    }
+
     public function setPictures(?array $pictures): self
     {
         $this->pictures = $pictures;

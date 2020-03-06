@@ -36,6 +36,16 @@ class FigureController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($photo = $form['pictures']->getData()) {
+                $filename = bin2hex(random_bytes(6)) . '.' . $photo->guessExtension();
+                dump($filename);
+                try {
+                    $photo->move($photoDir, $filename);
+                } catch (FileException $e) {
+                    //Upload failed
+                }
+                $figure->addPicture($filename);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figure);
             $entityManager->flush();
@@ -62,12 +72,22 @@ class FigureController extends AbstractController
     /**
      * @Route("/{id}/edit", name="figure_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Figure $figure): Response
+    public function edit(Request $request, Figure $figure, string $photoDir): Response
     {
         $form = $this->createForm(FigureType::class, $figure);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($photo = $form['pictures']->getData()) {
+                $filename= bin2hex(random_bytes(6)).'.'.$photo->guessExtension();
+                dump($filename);
+                try {
+                    $photo->move($photoDir, $filename);
+                } catch (FileException $e) {
+                    //Upload failed
+                }
+                $figure->addPicture($filename);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('figure_index');
