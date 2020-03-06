@@ -7,32 +7,25 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 
 class FigureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', null, ['label' => 'Nom de la figure'])
             ->add('description')
-            ->add('family')
+            ->add('family',null, ['label' => 'Catégorie'])
             ->add('pictures', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'Envoyez une illustration',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'application/pdf',
-                            'application/x-pdf',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
-                    ])
+                    new Image(['maxSize' => '1024k'])
                 ],
             ])
-            ->add('videos')
+            ->add('videos',null, ['label' => 'Lien vers une vidéo'])
         ;
     }
 
