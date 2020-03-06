@@ -23,7 +23,7 @@
                 <th>Pictures</th>
                 {% if figure.pictures|length > 0 %}
                     {% for picture in figure.pictures %}
-                        <td><img src="{{ asset('uploads/photos/' ~ picture) }}" alt="{{ figure.name }}" height="200" /></td>
+                        <td><img src="{{ asset('uploads/photos/' ~ picture) }}" alt="{{ figure.name ~ loop.index }}" height="200" /></td>
                     {% endfor %}
                 {% else %}
                     <td>Il n'y a pas d'image pour cette figure.</td>
