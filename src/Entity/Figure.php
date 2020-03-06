@@ -117,6 +117,12 @@ class Figure
         return $this->videos;
     }
 
+    public function addVideo(string $link): self
+    {
+        $this->videos[] = $link;
+
+        return $this;
+    }
     public function setVideos(?array $videos): self
     {
         $this->videos = $videos;

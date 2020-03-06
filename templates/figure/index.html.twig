@@ -10,11 +10,11 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Slug</th>
                 <th>Description</th>
                 <th>Family</th>
                 <th>Pictures</th>
                 <th>Videos</th>
-                <th>Slug</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,11 +23,11 @@
             <tr>
                 <td>{{ figure.id }}</td>
                 <td>{{ figure.name }}</td>
+                <td>{{ figure.slug }}</td>
                 <td>{{ figure.description }}</td>
                 <td>{{ figure.family }}</td>
                 <td>{{ figure.pictures ? figure.pictures|length : '0' }}</td>
-                <td>{{ figure.videos ? figure.videos|join(', ') : '' }}</td>
-                <td>{{ figure.slug }}</td>
+                <td>{{ figure.videos ? figure.videos|length : '0' }}</td>
                 <td>
                     <a href="{{ path('figure_show', {'slug': figure.slug}) }}">show</a>
                     <a href="{{ path('figure_edit', {'id': figure.id}) }}">edit</a>

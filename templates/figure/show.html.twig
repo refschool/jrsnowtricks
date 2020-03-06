@@ -33,7 +33,7 @@
                 <th>Videos</th>
                 {% if figure.videos|length > 0 %}
                     {% for videopath in figure.videos %}
-                        <td><object data="{{ videopath }}" height="300" width="560"></object></td>
+                        <td><iframe src="{{ videopath }}" height="300" width="560"></iframe></td>
                     {% endfor %}
                 {% else %}
                     <td>Il n'y a pas de vidéo pour cette figure.</td>

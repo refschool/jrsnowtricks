@@ -29,7 +29,7 @@ class FigureController extends AbstractController
     /**
      * @Route("/new", name="figure_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, string $photoDir): Response
     {
         $figure = new Figure();
         $form = $this->createForm(FigureType::class, $figure);
@@ -46,6 +46,11 @@ class FigureController extends AbstractController
                 }
                 $figure->addPicture($filename);
             }
+
+            if ($link = $form['videos']->getData()) {
+                $figure->addVideo($link);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figure);
             $entityManager->flush();
@@ -88,6 +93,11 @@ class FigureController extends AbstractController
                 }
                 $figure->addPicture($filename);
             }
+
+            if (!empty($form['videos'])) {
+                $figure->addVideo($form['videos']->getData());
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('figure_index');
