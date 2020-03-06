@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
- * @UniqueEntity("slug")
+ * @UniqueEntity("name")
  */
 class Figure
 {
@@ -21,6 +23,7 @@ class Figure
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -125,7 +128,7 @@ class Figure
 
         return $this;
     }
-    
+
     public function sluggify(SluggerInterface $slugger)
     {
         $this->slug = (string) $slugger->slug($this->name)->lower();
