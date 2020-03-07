@@ -85,12 +85,7 @@ class FigureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($photo = $form['pictures']->getData()) {
                 $filename= bin2hex(random_bytes(6)).'.'.$photo->guessExtension();
-                dump($filename);
-                try {
-                    $photo->move($photoDir, $filename);
-                } catch (FileException $e) {
-                    //Upload failed
-                }
+                $photo->move($photoDir, $filename);
                 $figure->addPicture($filename);
             }
 
