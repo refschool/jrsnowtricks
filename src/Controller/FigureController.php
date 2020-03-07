@@ -94,8 +94,8 @@ class FigureController extends AbstractController
                 $figure->addPicture($filename);
             }
 
-            if (!empty($form['videos'])) {
-                $figure->addVideo($form['videos']->getData());
+            if ($link = $form['videos']->getData()) {
+                $figure->addVideo($link);
             }
 
             $this->getDoctrine()->getManager()->flush();
