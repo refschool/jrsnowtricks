@@ -2,8 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('assets/css/bulma.min.css') }}">
         {% block stylesheets %}{% endblock %}
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script src="{{ asset('assets/javascripts/jquery-3.4.1.min.js') }}"></script>
     </head>
     <body>
         {% block body %}{% endblock %}
