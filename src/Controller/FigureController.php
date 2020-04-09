@@ -50,7 +50,6 @@ class FigureController extends AbstractController
                 $figure->addPicture($filename);
             }
 
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figure);
             $entityManager->flush();
