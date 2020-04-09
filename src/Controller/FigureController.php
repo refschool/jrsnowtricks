@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Figure;
+use App\Entity\Video;
 use App\Form\FigureType;
 use App\Repository\FigureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +33,9 @@ class FigureController extends AbstractController
     public function new(Request $request, string $photoDir): Response
     {
         $figure = new Figure();
+
         $form = $this->createForm(FigureType::class, $figure);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -47,8 +50,11 @@ class FigureController extends AbstractController
                 $figure->addPicture($filename);
             }
 
-            if ($link = $form['videos']->getData()) {
-                $figure->addVideo($link);
+            if ($links = $form['videos']->getData()) {
+                foreach ($links-> as ) {
+                    $figure->addVideo($link);
+                }
+
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -59,7 +65,6 @@ class FigureController extends AbstractController
         }
 
         return $this->render('figure/new.html.twig', [
-            'figure' => $figure,
             'form' => $form->createView(),
         ]);
     }

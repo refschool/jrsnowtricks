@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Figure;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,13 +26,13 @@ class FigureType extends AbstractType
                 'constraints' => [
                     new Image(['maxSize' => '1024k'])
                 ],
-            ])
-            ->add('videos',TextType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => 'Lien vers une vidéo',
-            ])
-        ;
+            ]   )
+            ->add('videos', CollectionType::class, [
+                'entry_type' => VideoType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'by_reference' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
