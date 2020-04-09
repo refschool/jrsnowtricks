@@ -50,12 +50,6 @@ class FigureController extends AbstractController
                 $figure->addPicture($filename);
             }
 
-            if ($links = $form['videos']->getData()) {
-                foreach ($links-> as ) {
-                    $figure->addVideo($link);
-                }
-
-            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figure);

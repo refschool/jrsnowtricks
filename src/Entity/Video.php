@@ -24,6 +24,8 @@ class Video
     private $videoId;
 
     /**
+     * Video type : YouTube or DailyMotion
+     *
      * @ORM\Column(type="string", length=8)
      */
     private $type;

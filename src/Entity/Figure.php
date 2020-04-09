@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -24,7 +23,7 @@ class Figure
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank
      */
     private $name;
@@ -33,11 +32,6 @@ class Figure
      * @ORM\Column(type="text")
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $family;
 
     /**
      * @ORM\Column(type="array", nullable=true)
@@ -53,6 +47,11 @@ class Figure
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="figure", orphanRemoval=true, cascade={"persist"})
      */
     private $videos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="figures")
+     */
+    private $category;
 
     public function __construct()
     {
@@ -84,18 +83,6 @@ class Figure
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getFamily(): ?string
-    {
-        return $this->family;
-    }
-
-    public function setFamily(?string $family): self
-    {
-        $this->family = $family;
 
         return $this;
     }
@@ -159,6 +146,18 @@ class Figure
                 $video->setFigure(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
