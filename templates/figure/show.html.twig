@@ -8,6 +8,10 @@
     <table class="table">
         <tbody>
             <tr>
+                <th>Id</th>
+                <td>{{ figure.id }}</td>
+            </tr>
+            <tr>
                 <th>Name</th>
                 <td>{{ figure.name }}</td>
             </tr>
@@ -16,28 +20,14 @@
                 <td>{{ figure.description }}</td>
             </tr>
             <tr>
-                <th>Family</th>
-                <td>{{ figure.family }}</td>
+                <th>Slug</th>
+                <td>{{ figure.slug }}</td>
             </tr>
             <tr>
-                <th>Pictures</th>
-                {% if figure.pictures|length > 0 %}
-                    {% for picture in figure.pictures %}
-                        <td><img src="{{ asset('uploads/photos/' ~ picture) }}" alt="{{ figure.name ~ loop.index }}" height="200" /></td>
-                    {% endfor %}
-                {% else %}
-                    <td>Il n'y a pas d'image pour cette figure.</td>
-                {% endif %}
-            </tr>
-            <tr>
-                <th>Videos</th>
-                {% if figure.videos|length > 0 %}
-                    {% for videopath in figure.videos %}
-                        <td><iframe src="{{ videopath }}" height="300" width="560"></iframe></td>
-                    {% endfor %}
-                {% else %}
-                    <td>Il n'y a pas de vidéo pour cette figure.</td>
-                {% endif %}
+                <th>Slug</th>
+                {% for picture in figure.pictures %}
+                    <td><img src="{{ asset(picture.webPath) }}" alt="{{ picture.alt }}"></td>
+                {% endfor %}
             </tr>
         </tbody>
     </table>
