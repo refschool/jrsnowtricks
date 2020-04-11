@@ -3,12 +3,13 @@
 {% block title %}New Figure{% endblock %}
 
 {% block body %}
-    <h1 class="title is-1">Nouvelle Figure</h1>
+    <h1>Create new Figure</h1>
 
     {{ include('figure/_form.html.twig') }}
 
-    <a class="button is-black" href="{{ path('figure_index') }}">Annuler</a>
+    <a href="{{ path('figure_index') }}">back to list</a>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/javascripts/addvideos.js') }}"></script>{% endblock %}
+    <script src="{{ asset('assets/javascripts/pictures.js') }}"></script>
+{% endblock %}

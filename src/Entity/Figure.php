@@ -45,11 +45,11 @@ class Figure
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"})
-     */
     private $displayPicture;
+     */
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="figure", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="figure", cascade={"persist", "remove"},  orphanRemoval=true)
      */
     private $pictures;
 
@@ -149,6 +149,7 @@ class Figure
         return $this;
     }
 
+    /*
     public function getDisplayPicture(): ?Picture
     {
         return $this->displayPicture;
@@ -160,6 +161,7 @@ class Figure
 
         return $this;
     }
+    */
 
     /**
      * @return Collection|Picture[]

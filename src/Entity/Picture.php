@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Picture
 {
@@ -35,6 +37,18 @@ class Picture
      * @ORM\JoinColumn(nullable=false)
      */
     private $figure;
+
+    /**
+     * @var UploadedFile $file
+     */
+    private $file;
+
+    /**
+     * Simple buffer
+     *
+     * @var string
+     */
+    private $tempFileName;
 
     public function getId(): ?int
     {
@@ -80,5 +94,63 @@ class Picture
     public function getWebPath(): string
     {
         return self::UPLOAD_DIR.'/'.$this->id.'.'.$this->extension;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile($file): self
+    {
+        $this->file = $file;
+
+        if ($this->extension) {
+            $this->tempFileName = $this->extension;
+        }
+
+        $this->extension = $this->alt = null;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function preUpload(): void
+    {
+        if (!$this->file) {
+            return;
+        }
+
+        $this->extension = $this->file->getClientOriginalExtension();
+        $this->alt = explode('.', $this->file->getClientOriginalName())[0];
+    }
+
+    /**
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
+    public function upload(): void
+    {
+        if (!$this->file) {
+            return;
+        }
+
+        if ($this->tempFileName) {
+            $oldFile = self::UPLOAD_ROOT_DIR.'/'.$this->id.'.'.$this->tempFileName;
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+
+        $this->file->move(self::UPLOAD_ROOT_DIR, $this->id.'.'.$this->extension);
     }
 }

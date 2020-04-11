@@ -3,17 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Figure;
-use App\Entity\Video;
 use App\Form\FigureType;
 use App\Repository\FigureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/")
+ * @Route("/figure")
  */
 class FigureController extends AbstractController
 {
@@ -30,40 +28,29 @@ class FigureController extends AbstractController
     /**
      * @Route("/new", name="figure_new", methods={"GET","POST"})
      */
-    public function new(Request $request, string $photoDir): Response
+    public function new(Request $request): Response
     {
         $figure = new Figure();
-
         $form = $this->createForm(FigureType::class, $figure);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($photo = $form['pictures']->getData()) {
-                $filename = bin2hex(random_bytes(6)) . '.' . $photo->guessExtension();
-                dump($filename);
-                try {
-                    $photo->move($photoDir, $filename);
-                } catch (FileException $e) {
-                    //Upload failed
-                }
-                $figure->addPicture($filename);
-            }
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figure);
             $entityManager->flush();
 
+            $this->addFlash('notice', 'La figure a bien été enregistrée !');
             return $this->redirectToRoute('figure_index');
         }
 
         return $this->render('figure/new.html.twig', [
+            'figure' => $figure,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{slug}", name="figure_show", methods={"GET"})
+     * @Route("/{id}", name="figure_show", methods={"GET"})
      */
     public function show(Figure $figure): Response
     {
@@ -75,22 +62,12 @@ class FigureController extends AbstractController
     /**
      * @Route("/{id}/edit", name="figure_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Figure $figure, string $photoDir): Response
+    public function edit(Request $request, Figure $figure): Response
     {
         $form = $this->createForm(FigureType::class, $figure);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($photo = $form['pictures']->getData()) {
-                $filename= bin2hex(random_bytes(6)).'.'.$photo->guessExtension();
-                $photo->move($photoDir, $filename);
-                $figure->addPicture($filename);
-            }
-
-            if ($link = $form['videos']->getData()) {
-                $figure->addVideo($link);
-            }
-
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('figure_index');
