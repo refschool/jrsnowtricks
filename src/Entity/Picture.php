@@ -124,7 +124,7 @@ class Picture
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function preUpload(): void
+    public function preUploadFile(): void
     {
         if (!$this->file) {
             return;
@@ -138,7 +138,7 @@ class Picture
      * @ORM\PostPersist
      * @ORM\PostUpdate
      */
-    public function upload(): void
+    public function uploadFile(): void
     {
         if (!$this->file) {
             return;
@@ -152,5 +152,24 @@ class Picture
         }
 
         $this->file->move(self::UPLOAD_ROOT_DIR, $this->id.'.'.$this->extension);
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function preRemoveFile(): void
+    {
+        $this->tempFileName = $this->id.'.'.$this->extension;
+    }
+
+    /**
+     * @ORM\PostRemove
+     */
+    public function removeFile(): void
+    {
+        if (file_exists(self::UPLOAD_ROOT_DIR.'/'.$this->tempFileName)) {
+            // On supprime le fichier
+            unlink(self::UPLOAD_ROOT_DIR.'/'.$this->tempFileName);
+        }
     }
 }
