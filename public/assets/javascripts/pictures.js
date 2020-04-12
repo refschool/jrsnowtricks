@@ -1,7 +1,7 @@
 var $collectionHolder;
 
 // setup an "add a tag" link
-var $addPictureButton = $('<button type="button" class="add_picture_link">Add a picture</button>');
+var $addPictureButton = $('<button type="button" class="button is-success add_picture_link">Add a picture</button>');
 var $newLinkLi = $('<li></li>').append($addPictureButton);
 
 jQuery(document).ready(function() {
@@ -52,7 +52,7 @@ function addPictureForm($collectionHolder, $newLinkLi) {
 }
 
 function addPictureFormDeleteLink($tagFormLi) {
-    var $removeFormButton = $('<button type="button">Delete this picture</button>');
+    var $removeFormButton = $('<button type="button" class="button is-danger">Delete this picture</button>');
     $tagFormLi.append($removeFormButton);
 
     $removeFormButton.on('click', function(e) {

@@ -168,7 +168,6 @@ class Picture
     public function removeFile(): void
     {
         if (file_exists(self::UPLOAD_ROOT_DIR.'/'.$this->tempFileName)) {
-            // On supprime le fichier
             unlink(self::UPLOAD_ROOT_DIR.'/'.$this->tempFileName);
         }
     }

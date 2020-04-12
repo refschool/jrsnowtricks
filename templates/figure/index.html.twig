@@ -3,9 +3,9 @@
 {% block title %}Figure index{% endblock %}
 
 {% block body %}
-    <h1>Figure index</h1>
+    <h1 class="title">Figure index</h1>
 
-    <table class="table">
+    <table class="table is-hoverable">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,8 +23,8 @@
                 <td>{{ figure.description }}</td>
                 <td>{{ figure.slug }}</td>
                 <td>
-                    <a href="{{ path('figure_show', {'id': figure.id}) }}">show</a>
-                    <a href="{{ path('figure_edit', {'id': figure.id}) }}">edit</a>
+                    <a href="{{ path('figure_show', {'id': figure.id}) }}" class="button">show</a>
+                    <a href="{{ path('figure_edit', {'id': figure.id}) }}" class="button is-primary">edit</a>
                 </td>
             </tr>
         {% else %}
