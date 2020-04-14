@@ -1,4 +1,5 @@
 {{ form_start(form) }}
+<h3 class="subtitle">Détails</h3>
     <div class="field">
         {{ form_label(form.name, null, {'attr': {'class': 'label'}}) }}
         {{ form_errors(form.name) }}
@@ -9,10 +10,17 @@
     {{ form_row(form.description) }}
     {{ form_row(form.category) }}
 
-    <h3 class="subtitle">Pictures</h3>
+    <h3 class="subtitle">Photos</h3>
     <ul class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e('html_attr') }}">
         {% for picture in form.pictures %}
             <li>{{ form_row(picture.file) }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3 class="subtitle">Vidéos</h3>
+    <ul class="videos" data-prototype="{{ form_widget(form.videos.vars.prototype)|e('html_attr') }}">
+        {% for video in form.videos %}
+            <li>{{ form_row(video.url) }}</li>
         {% endfor %}
     </ul>
     <button class="button is-success">{{ button_label|default('Save') }}</button>

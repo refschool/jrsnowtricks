@@ -23,16 +23,22 @@ class Picture
     private $id;
 
     /**
+     * Extension of the file as the user originally uploaded.
+     *
      * @ORM\Column(type="string", length=5)
      */
     private $extension;
 
     /**
+     * Alternative text associated to the img markup. Originally the name of the file the user uploaded.
+     *
      * @ORM\Column(type="string", length=50)
      */
     private $alt;
 
     /**
+     * Figure's post this picture is related to.
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="pictures")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -44,7 +50,7 @@ class Picture
     private $file;
 
     /**
-     * Simple buffer
+     * Simple buffer variable in order to manage the filename during upload.
      *
      * @var string
      */

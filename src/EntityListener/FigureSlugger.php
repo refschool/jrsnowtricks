@@ -6,7 +6,7 @@ use App\Entity\Figure;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class FigureEntityListener
+class FigureSlugger
 {
     private $slugger;
     

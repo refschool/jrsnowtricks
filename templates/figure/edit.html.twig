@@ -3,7 +3,7 @@
 {% block title %}Edit Figure{% endblock %}
 
 {% block body %}
-    <h1>Edit Figure</h1>
+    <h1 class="title">Editer cette Figure</h1>
 
     {{ include('figure/_form.html.twig', {'button_label': 'Update'}) }}
 
@@ -13,5 +13,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/javascripts/pictures.js') }}"></script>
+    <script src="{{ asset('assets/javascripts/figure_form.js') }}"></script>
 {% endblock %}

@@ -27,6 +27,13 @@ class FigureType extends AbstractType
                 'allow_delete' => true,
                 'prototype' => true,
             ])
+            ->add('videos', CollectionType::class, [
+                'entry_type' => VideoType::class,
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+            ])
         ;
     }
 

@@ -11,6 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Video
 {
+
+    const YOUTUBE = 0;
+
+    const DAILYMOTION = 1;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -19,6 +24,8 @@ class Video
     private $id;
 
     /**
+     * Video's string of characters used in the URL in order to access it.
+     *
      * @ORM\Column(type="string", length=25)
      */
     private $videoId;
@@ -35,6 +42,11 @@ class Video
      * @ORM\JoinColumn(nullable=false)
      */
     private $figure;
+
+    /**
+     * @var string
+     */
+    private $url;
 
     public function __construct()
     {
