@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
@@ -103,11 +102,6 @@ class Figure
         $this->slug = $slug;
 
         return $this;
-    }
-
-    public function sluggify(SluggerInterface $slugger)
-    {
-        $this->slug = (string) $slugger->slug($this->name)->lower();
     }
 
     /**
