@@ -84,6 +84,11 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
     </include_path>
   </component>
+  <component name="PhpProjectServersManager">
+    <servers>
+      <server host="snowtricks.test" id="d7aa590e-06fe-480c-bd59-521b2628a606" name="snowtricks.test" />
+    </servers>
+  </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
   <component name="PhpUnit">
     <phpunit_settings>
