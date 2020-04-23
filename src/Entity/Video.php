@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Video
 {
-
     const YOUTUBE = 0;
 
     const DAILYMOTION = 1;
@@ -31,11 +30,11 @@ class Video
     private $videoId;
 
     /**
-     * Video type : YouTube or DailyMotion
+     * Platform : YouTube or DailyMotion
      *
      * @ORM\Column(type="string", length=8)
      */
-    private $type;
+    private $platform;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="videos")
@@ -70,14 +69,14 @@ class Video
         return $this;
     }
 
-    public function getType(): ?string
+    public function getPlatform(): ?string
     {
-        return $this->type;
+        return $this->platform;
     }
 
-    public function setType(string $type): self
+    public function setPlatform(string $platform): self
     {
-        $this->type = $type;
+        $this->platform = $platform;
 
         return $this;
     }

@@ -45,5 +45,4 @@ class VideoPlatformParser
 
         return $this;
     }
-
 }

@@ -27,7 +27,7 @@ class VideoType extends AbstractType
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
                 $video = $event->getData();
                 if (null !== $videoUrl = $video->getUrl()) {
-                    $parser->parseUrl($videoUrl);
+                    $this->parser->parseUrl($videoUrl);
                     $video->setVideoId($this->parser->getVideoId());
                     $video->setType($this->parser->getWebSite());
                 }
