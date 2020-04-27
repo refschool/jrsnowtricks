@@ -13,6 +13,8 @@ class VideoPlatformParser
 
     public function parseUrl($url): bool
     {
+        $this->videoId = $this->webSite = null;
+
         //Traiter l'url
 
         $this->webSite = "YouTube";
