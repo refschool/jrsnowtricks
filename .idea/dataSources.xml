@@ -11,5 +11,11 @@
         <property name="serverTimezone" value="UTC" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="database" uuid="fc407299-82b5-4f5e-b6eb-c2210f2a4d98">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\jrobic\Documents\Projets\Snowtricks\data\database.sqlite</jdbc-url>
+    </data-source>
   </component>
 </project>

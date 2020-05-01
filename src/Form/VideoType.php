@@ -23,16 +23,20 @@ class VideoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('URL', UrlType::class)
+            ->add('URL', UrlType::class, [
+                'trim' => true,
+                'mapped' => false,
+                'attr' => ['placeholder' => 'Youtube, Dailymotion ou Vimeo'],
+            ])
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
                 $video = $event->getData();
-                if (null !== $videoUrl = $video->getUrl()) {
+                $videoUrl = $event->getForm()->get('URL')->getNormData();
+                if (null !== $videoUrl) {
                     $this->parser->parseUrl($videoUrl);
                     $video->setVideoId($this->parser->getVideoId());
-                    $video->setType($this->parser->getWebSite());
+                    $video->setPlatform($this->parser->getWebSite());
                 }
-            })
-        ;
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver)

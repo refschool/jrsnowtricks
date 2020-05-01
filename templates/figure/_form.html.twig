@@ -10,7 +10,7 @@
     {{ form_row(form.description) }}
     {{ form_row(form.category) }}
 
-    <h3 class="subtitle">{{ form_label(form.pictures) }}</h3>
+<h3 class="subtitle">{{ form_label(form.pictures) }}</h3>
     <ul class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e('html_attr') }}">
     {% for picture in form.pictures %}
         <li>{{ form_row(picture.file) }}</li>

@@ -15,12 +15,24 @@ class Video
 
     const DAILYMOTION = 1;
 
+    const VIMEO = 2;
+
     /**
+     * Primary key
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * Foreign key
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="videos")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $figure;
 
     /**
      * Video's string of characters used in the URL in order to access it.
@@ -30,22 +42,11 @@ class Video
     private $videoId;
 
     /**
-     * Platform : YouTube or DailyMotion
+     * Platform : YouTube, Vimeo or DailyMotion
      *
      * @ORM\Column(type="string", length=8)
      */
     private $platform;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="videos")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $figure;
-
-    /**
-     * @var string
-     */
-    private $url;
 
     public function __construct()
     {
@@ -71,12 +72,26 @@ class Video
 
     public function getPlatform(): ?string
     {
-        return $this->platform;
+        if ($this->platform == self::YOUTUBE) {
+            return 'youtube';
+        } elseif ($this->platform == self::DAILYMOTION) {
+            return 'dailymotion';
+        } elseif ($this->platform == self::VIMEO) {
+            return 'vimeo';
+        }
+
+        return null;
     }
 
     public function setPlatform(string $platform): self
     {
-        $this->platform = $platform;
+        if (strtolower($platform) == 'youtube') {
+            $this->platform = self::YOUTUBE;
+        } elseif (strtolower($platform) == 'dailymotion') {
+            $this->platform = self::DAILYMOTION;
+        } elseif (strtolower($platform) == 'vimeo') {
+            $this->platform = self::VIMEO;
+        }
 
         return $this;
     }
@@ -101,14 +116,12 @@ class Video
      */
     public function getUrl(): string
     {
-        return $this->url;
-    }
-
-    /**
-     * @param string $url
-     */
-    public function setUrl(string $url): void
-    {
-        $this->url = $url;
+        if ($this->platform == self::YOUTUBE) {
+            return 'https://www.youtube.com/embed/'.$this->videoId;
+        } elseif ($this->platform == self::VIMEO) {
+            return 'https://player.vimeo.com/video/'.$this->videoId;
+        } elseif ($this->platform == self::DAILYMOTION) {
+            return 'https://www.dailymotion.com/video/'.$this->videoId;
+        }
     }
 }

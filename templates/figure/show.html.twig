@@ -26,6 +26,17 @@
                     <td><img src="{{ asset(picture.webPath) }}" alt="{{ picture.alt }}" width="250"></td>
                 {% endfor %}
             </tr>
+
+            <tr>
+                <th>Videos</th>
+                {% for video in figure.videos %}
+                    {% if video.platform == 'youtube' or video.platform == 'vimeo' %}
+                        <td><iframe width="350" height="210" src="{{ video.url }}" allowfullscreen></iframe></td>
+                    {% elseif video.platform == 'dailymotion' %}
+                        <td><iframe width="313" height="210" src="{{ video.url }}" allowfullscreen></iframe></td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
         </tbody>
     </table>
 
