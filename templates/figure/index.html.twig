@@ -2,38 +2,36 @@
 
 {% block title %}Figure index{% endblock %}
 
-{% block body %}
-    <h1 class="title">Figure index</h1>
+{% block main %}
 
-    <table class="table is-hoverable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Slug</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row align-items-center" style="height: 1080px">
+        <div class="col-12 text-center">
+            <h1 class="font-weight-bold" style="color:red;">Venez trouver votre style</h1>
+        </div>
+    </div>
+
+    <div class="row py-5 mx-3">
         {% for figure in figures %}
-            <tr>
-                <td>{{ figure.id }}</td>
-                <td>{{ figure.name }}</td>
-                <td>{{ figure.description }}</td>
-                <td>{{ figure.slug }}</td>
-                <td>
-                    <a href="{{ path('figure_show', {'id': figure.id}) }}" class="button">show</a>
-                    <a href="{{ path('figure_edit', {'id': figure.id}) }}" class="button is-warning">edit</a>
-                </td>
-            </tr>
+            <div class="col-sm-2">
+                <div class="card">
+                    <img src="{{ asset('assets/images/card-default.jpg') }}" class="card-img-top" alt="Default" height="100" style="object-fit: cover;">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <div class="float-left">
+                                <a href="{{ path('figure_show', {'id': figure.id}) }}" style="text-decoration: underline;">{{ figure.name }}</a>
+                            </div>
+                            <div class="float-right" >
+                                <a href="{{ path('figure_edit', {'id': figure.id}) }}" style="color: black;"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="#" class="pl-3" style="color: black;"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('figure_new') }}" class="button is-primary">Create new</a>
+    </div>
 {% endblock %}

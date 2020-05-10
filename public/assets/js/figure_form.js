@@ -1,10 +1,10 @@
 var $videosCollectionHolder;
 var $picturesCollectionHolder;
 
-var $addPictureButton = $('<button type="button" class="button is-success is-light is-outlined add_picture_link"><i class="fas fa-plus"></i>Ajouter une image<i class="fas fa-image"></i></button>');
+var $addPictureButton = $('<button type="button" class="btn btn-outline-success add_picture_link"><i class="fas fa-plus"></i>Ajouter une image<i class="fas fa-image"></i></button>');
 var $newPictureLinkLi = $('<li></li>').append($addPictureButton);
 
-var $addVideoButton = $('<button type="button" class="button is-success is-light is-outlined add_video_link"><i class="fas fa-plus"></i>Ajouter une vidéo<i class="fab fa-youtube"></i></button>');
+var $addVideoButton = $('<button type="button" class="btn btn-outline-success add_video_link"><i class="fas fa-plus"></i>Ajouter une vidéo<i class="fab fa-youtube"></i></button>');
 var $newVideoLinkLi = $('<li></li>').append($addVideoButton);
 
 jQuery(document).ready(function() {
@@ -25,14 +25,14 @@ jQuery(document).ready(function() {
     $addVideoButton.on('click', function() {
         addVideoForm($videosCollectionHolder, $newVideoLinkLi);
     });
-    /*
+
     $picturesCollectionHolder.find('li').each(function() {
         addPictureFormDeleteLink($(this));
     });
 
     $videosCollectionHolder.find('li').each(function() {
         addVideoFormDeleteLink($(this));
-    });*/
+    });
 });
 
 function addPictureForm($picturesCollectionHolder, $newPictureLinkLi) {
@@ -68,19 +68,19 @@ function addVideoForm($videosCollectionHolder, $newVideoLinkLi) {
 }
 
 function addPictureFormDeleteLink($pictureFormLi) {
-    var $removePictureFormButton = $('<button type="button" class="button is-danger is-light is-outlined">Delete this picture</button>');
+    var $removePictureFormButton = $('<button type="button" class="btn btn-outline-danger is-light is-outlined">Delete this picture</button>');
     $pictureFormLi.append($removePictureFormButton);
 
-    $removePictureFormButton.on('click', function(e) {
+    $removePictureFormButton.on('click', function() {
         $pictureFormLi.remove();
     });
 }
 
 function addVideoFormDeleteLink($videoFormLi) {
-    var $removeVideoFormButton = $('<button type="button" class="button is-danger is-light is-outlined">Delete this video</button>');
+    var $removeVideoFormButton = $('<button type="button" class="btn btn-outline-danger is-light is-outlined">Delete this video</button>');
     $videoFormLi.append($removeVideoFormButton);
 
-    $removeVideoFormButton.on('click', function(e) {
+    $removeVideoFormButton.on('click', function() {
         $videoFormLi.remove();
     });
 }

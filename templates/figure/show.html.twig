@@ -1,48 +1,28 @@
-{% extends 'base.html.twig' %}
+{% extends 'figure/display_template.html.twig' %}
 
-{% block title %}Figure{% endblock %}
+{% block title %}{{ figure.name }}{% endblock %}
 
-{% block body %}
-    <h1 class="title">Figure</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ figure.name }}</td>
-            </tr>
-            <tr>
-                <th>Category</th>
-                <td>{{ figure.category }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ figure.description }}</td>
-            </tr>
-
-            <tr>
-                <th>Pictures</th>
-                {% for picture in figure.pictures %}
-                    <td><img src="{{ asset(picture.webPath) }}" alt="{{ picture.alt }}" width="250"></td>
-                {% endfor %}
-            </tr>
-
-            <tr>
-                <th>Videos</th>
-                {% for video in figure.videos %}
-                    {% if video.platform == 'youtube' or video.platform == 'vimeo' %}
-                        <td><iframe width="350" height="210" src="{{ video.url }}" allowfullscreen></iframe></td>
-                    {% elseif video.platform == 'dailymotion' %}
-                        <td><iframe width="313" height="210" src="{{ video.url }}" allowfullscreen></iframe></td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('figure_index') }}" class="button ">back to list</a>
-
-    <a href="{{ path('figure_edit', {'id': figure.id}) }}" class="button is-primary">edit</a>
-
-    {{ include('figure/_delete_form.html.twig') }}
+{% block header_edition %}
+    <a href="{{ path('figure_edit', {'id': figure.id}) }}" style="color: black;"><i class="fas fa-pencil-alt"></i></a>
+    <a href="#" class="pl-3" style="color: black;"><i class="fas fa-trash-alt"></i></a>
 {% endblock %}
+
+{% block name %}{% endblock %}
+
+{% block picture_edition %}{% endblock %}
+
+{% block video_edition %}{% endblock %}
+
+{% block figure_category %}
+    {{ figure.category }}
+{% endblock %}
+
+{% block figure_name %}
+    {{ figure.name }}
+{% endblock %}
+
+{% block figure_description %}
+    {{ figure.description }}
+{% endblock %}
+
+{% block buttons %}{% endblock %}

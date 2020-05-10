@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/figure")
+ * @Route("/")
  */
 class FigureController extends AbstractController
 {
@@ -30,11 +30,11 @@ class FigureController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $figure = new Figure();
-        $form = $this->createForm(FigureType::class, $figure);
-        $form->handleRequest($request);
+        $form = $this->createForm(FigureType::class);
 
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $figure = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figure);
             $entityManager->flush();
@@ -44,7 +44,6 @@ class FigureController extends AbstractController
         }
 
         return $this->render('figure/new.html.twig', [
-            'figure' => $figure,
             'form' => $form->createView(),
         ]);
     }
@@ -91,5 +90,28 @@ class FigureController extends AbstractController
         }
 
         return $this->redirectToRoute('figure_index');
+    }
+
+    public function videoAdd()
+    {
+        return $this->json('ok');
+    }
+
+    /**
+     * @Route("/videos/{id}/remove", name="videos_remove")
+     */
+    public function videoRemove(string $id): Response
+    {
+        return $this->json('ok on cherche à supprimer la '. $id);
+    }
+
+    public function pictureAdd()
+    {
+        return $this->json('ok');
+    }
+
+    public function pictureRemove()
+    {
+        return $this->json('ok');
     }
 }

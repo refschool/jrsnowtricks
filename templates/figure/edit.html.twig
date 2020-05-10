@@ -1,17 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends 'figure/display_template.html.twig' %}
 
-{% block title %}Edit Figure{% endblock %}
+{% block title %}Edit {{ figure.name }}{% endblock %}
 
-{% block body %}
-    <h1 class="title">Editer cette Figure</h1>
+{% block header_edition %}
+    <a href="#" style="color: black;"><i class="fas fa-pencil-alt"></i></a>
+    <a href="#" class="pl-3" style="color: black;"><i class="fas fa-trash-alt"></i></a>
+{% endblock %}
 
-    {{ include('figure/_form.html.twig', {'button_label': 'Update'}) }}
+{% block picture_edition %}
+{% endblock %}
 
-    <a href="{{ path('figure_index') }}">back to list</a>
+{% block video_edition %}
+    <a class="video-remove" data-title="{{ video.id }}" href="#"><i class="fa fa-trash"></i></a>
+{% endblock %}
 
-    {{ include('figure/_delete_form.html.twig') }}
+{% block figure_category %}
+    {{ form_widget(form.category) }}
+{% endblock %}
+
+{% block figure_name %}
+    {{ form_widget(form.name) }}
+{% endblock %}
+
+{% block figure_description %}
+    {{ form_widget(form.description) }}
+{% endblock %}
+
+{% block buttons %}
+    <div class="p-2">
+        <button class="btn btn-success">Sauvegarder</button>
+    </div>
+    <div class="p-2">
+        {{ include('figure/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/javascripts/figure_form.js') }}"></script>
+    <script src="{{ asset('assets/js/figure_form.js') }}"></script>
+    <script src="{{ asset('assets/js/figure_edit.js') }}"></script>
 {% endblock %}

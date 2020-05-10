@@ -23,16 +23,17 @@ class VideoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('URL', UrlType::class, [
+            ->add('url', UrlType::class, [
                 'trim' => true,
                 'mapped' => false,
+                'label' => 'Lien vers la vidéo',
                 'attr' => ['placeholder' => 'Youtube, Dailymotion ou Vimeo'],
             ])
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
                 $video = $event->getData();
-                $videoUrl = $event->getForm()->get('URL')->getNormData();
-                if (null !== $videoUrl) {
-                    $this->parser->parseUrl($videoUrl);
+                $userUrl = $event->getForm()->get('url')->getNormData();
+                if (null !== $userUrl) {
+                    $this->parser->parseUrl($userUrl);
                     $video->setVideoId($this->parser->getVideoId());
                     $video->setPlatform($this->parser->getWebSite());
                 }
