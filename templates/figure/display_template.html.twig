@@ -42,16 +42,19 @@
             </div>
         </div>
 
-        <div class="col-4 offset-3">
+        <div class="col-6 offset-2">
             <div class="row justify-content-between">
-                <div class="col-4">
+                <div class="col-3">
                     {% block figure_name %}{% endblock %}
                 </div>
-                <div class="col-4">
-                    09/05/2020
+                <div class="col-3">
+                    {% block figure_createdAt %}{% endblock %}
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     {% block figure_category %}{% endblock %}
+                </div>
+                <div class="col-3">
+                    {% block figure_lastModified %}{% endblock %}
                 </div>
             </div>
         </div>

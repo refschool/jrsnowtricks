@@ -17,6 +17,14 @@
     {{ figure.category }}
 {% endblock %}
 
+{% block figure_createdAt %}
+    {{ figure.createdAt|date("m/d/Y") }}
+{% endblock %}
+
+{% block figure_lastModified %}
+    {{ figure.lastModified|date("m/d/Y") }}
+{% endblock %}
+
 {% block figure_name %}
     {{ figure.name }}
 {% endblock %}

@@ -48,7 +48,7 @@ class Figure
      */
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="figure", cascade={"persist", "remove"},  orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="figure", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $pictures;
 
@@ -56,6 +56,16 @@ class Figure
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="figure", orphanRemoval=true, cascade={"persist"})
      */
     private $videos;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastModified;
 
     public function __construct()
     {
@@ -184,6 +194,30 @@ class Figure
                 $picture->setFigure(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getLastModified(): ?\DateTimeInterface
+    {
+        return $this->lastModified;
+    }
+
+    public function setLastModified(?\DateTimeInterface $lastModified): self
+    {
+        $this->lastModified = $lastModified;
 
         return $this;
     }
