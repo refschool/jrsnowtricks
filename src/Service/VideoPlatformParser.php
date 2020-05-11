@@ -36,7 +36,7 @@ class VideoPlatformParser
      */
     public function parseUrl(?string $aUrl): bool
     {
-        $this->videoId = $this->webSite = null;
+        $this->videoId = $this->website = null;
         $this->parsedUrl = $aUrl;
 
         if (!$aUrl) {

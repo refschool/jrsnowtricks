@@ -114,7 +114,7 @@ class Video
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         if ($this->platform == self::YOUTUBE) {
             return 'https://www.youtube.com/embed/'.$this->videoId;
@@ -123,5 +123,7 @@ class Video
         } elseif ($this->platform == self::DAILYMOTION) {
             return 'https://www.dailymotion.com/video/'.$this->videoId;
         }
+
+        return null;
     }
 }
