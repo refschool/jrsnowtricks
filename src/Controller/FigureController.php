@@ -49,7 +49,7 @@ class FigureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="figure_show", methods={"GET"})
+     * @Route("/{id}", name="figure_show", methods={"GET"}, requirements={"id":"\d+"})
      */
     public function show(Figure $figure): Response
     {
@@ -59,7 +59,7 @@ class FigureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="figure_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="figure_edit", methods={"GET","POST"}, requirements={"id":"\d+"})
      */
     public function edit(Request $request, Figure $figure): Response
     {
@@ -79,7 +79,7 @@ class FigureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="figure_delete", methods={"DELETE"})
+     * @Route("/{id}", name="figure_delete", methods={"DELETE"}, requirements={"id":"\d+"})
      */
     public function delete(Request $request, Figure $figure): Response
     {
@@ -95,14 +95,6 @@ class FigureController extends AbstractController
     public function videoAdd()
     {
         return $this->json('ok');
-    }
-
-    /**
-     * @Route("/videos/{id}/remove", name="videos_remove")
-     */
-    public function videoRemove(string $id): Response
-    {
-        return $this->json('ok on cherche à supprimer la '. $id);
     }
 
     public function pictureAdd()

@@ -26,7 +26,7 @@
                     <a class="nav-link" href="{{ path('figure_new') }}">Tricks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign in</a>
+                    <a class="nav-link" href="{{ path('app_login') }}">Log in</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Sign up</a>
@@ -36,19 +36,22 @@
             <i class="navbar-brand fas fa-sign-in-alt d-lg-none"></i>
         </header>
 
-        <main class="cover container-fluid">
+        <main class="container-fluid row justify-content-center">
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
                 {{ message }}
             </div>
         {% endfor %}
-        {% block main %}{% endblock %}
+            <div class="col-12 m-5 container-fluid">
+            {% block main %}
+            {% endblock %}
+            </div>
         </main>
-        {#
+
         <footer class="footer bg-light">
             <div>Copyright © 2020</div>
         </footer>
-           #}
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

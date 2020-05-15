@@ -14,20 +14,12 @@
     <a class="video-remove" data-title="{{ video.id }}" href="#"><i class="fa fa-trash"></i></a>
 {% endblock %}
 
-{% block figure_category %}
-    {{ form_widget(form.category) }}
-{% endblock %}
-
-{% block figure_createdAt %}
-    {{ figure.createdAt|date("m/d/Y") }}
-{% endblock %}
-
-{% block figure_lastModified %}
-    {{ figure.lastModified|date("m/d/Y") }}
-{% endblock %}
-
 {% block figure_name %}
     {{ form_widget(form.name) }}
+{% endblock %}
+
+{% block figure_category %}
+    {{ form_widget(form.category) }}
 {% endblock %}
 
 {% block figure_description %}
@@ -35,11 +27,16 @@
 {% endblock %}
 
 {% block buttons %}
-    <div class="p-2">
-        <button class="btn btn-success">Sauvegarder</button>
-    </div>
-    <div class="p-2">
-        {{ include('figure/_delete_form.html.twig') }}
+    <div class="d-flex">
+        <div class="mr-auto p-2">
+            <a href="{{ path('figure_show', {'id': figure.id}) }}" class="btn btn-dark">Annuler</a>
+        </div>
+        <div class="p-2">
+            <button class="btn btn-success">Sauvegarder</button>
+        </div>
+        <div class="p-2">
+            {{ include('figure/_delete_form.html.twig') }}
+        </div>
     </div>
 {% endblock %}
 

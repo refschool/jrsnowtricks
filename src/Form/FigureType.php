@@ -34,7 +34,7 @@ class FigureType extends AbstractType
             ->add('description')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-            ])/*
+            ]) /*
             ->add('pictures', CollectionType::class, [
                 'entry_type' => PictureType::class,
                 'by_reference' => false,
@@ -48,7 +48,7 @@ class FigureType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
-            ])*/
+            ]) */
             ->add('url', UrlType::class, [
                 'trim' => true,
                 'mapped' => false,

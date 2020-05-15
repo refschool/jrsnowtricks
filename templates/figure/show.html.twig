@@ -7,30 +7,26 @@
     <a href="#" class="pl-3" style="color: black;"><i class="fas fa-trash-alt"></i></a>
 {% endblock %}
 
-{% block name %}{% endblock %}
-
 {% block picture_edition %}{% endblock %}
 
 {% block video_edition %}{% endblock %}
 
-{% block figure_category %}
-    {{ figure.category }}
-{% endblock %}
-
-{% block figure_createdAt %}
-    {{ figure.createdAt|date("m/d/Y") }}
-{% endblock %}
-
-{% block figure_lastModified %}
-    {{ figure.lastModified|date("m/d/Y") }}
-{% endblock %}
-
 {% block figure_name %}
     {{ figure.name }}
+{% endblock %}
+
+{% block figure_category %}
+    {{ figure.category }}
 {% endblock %}
 
 {% block figure_description %}
     {{ figure.description }}
 {% endblock %}
 
-{% block buttons %}{% endblock %}
+{% block figure_comments %}
+    {% if (true == false) %}
+        <div class="d-flex">
+            <h1>Commentaires</h1>
+        </div>
+    {% endif %}
+{% endblock %}
