@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\traits\EntityIdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,20 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Video
 {
+    use EntityIdTrait;
+
     const YOUTUBE = 0;
-
     const DAILYMOTION = 1;
-
     const VIMEO = 2;
-
-    /**
-     * Primary key
-     *
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * Foreign key
@@ -51,11 +43,6 @@ class Video
     public function __construct()
     {
         $this->figure = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getVideoId(): ?string

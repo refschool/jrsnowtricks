@@ -48,13 +48,13 @@ class VideoPlatformParser
                 $this->videoId = $id[1];
                 $this->website = 'youtube';
             }
-        } elseif(strpos($aUrl, 'vimeo') !== false) {
+        } elseif (strpos($aUrl, 'vimeo') !== false) {
             // vimeo
             if (preg_match('/https:\/\/vimeo.com\/([\w-]+)/', $aUrl, $id)) {
                 $this->videoId = $id[1];
                 $this->website = 'vimeo';
             }
-        } elseif(strpos($aUrl, 'dailymotion') !== false) {
+        } elseif (strpos($aUrl, 'dailymotion') !== false) {
             // dailymotion
             if (preg_match('/(.+)dailymotion.com\/video\/([\w-]+)/', $aUrl, $id)) {
                 $this->videoId = $id[2];
@@ -96,8 +96,8 @@ class VideoPlatformParser
     public function getResults(): array
     {
         return [
-          'website' => $this->website,
-          'videoId' => $this->videoId,
+            'website' => $this->website,
+            'videoId' => $this->videoId,
         ];
     }
 }

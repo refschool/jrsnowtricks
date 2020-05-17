@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\traits\EntityIdTrait;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -11,12 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use EntityIdTrait;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -33,11 +29,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     /**
      * A visual identifier that represents this user.

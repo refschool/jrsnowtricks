@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\traits\EntityIdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -11,16 +12,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class Picture
 {
+    use EntityIdTrait;
+
     const UPLOAD_DIR = 'uploads/img';
 
     const UPLOAD_ROOT_DIR = __DIR__.'/../../public/'.self::UPLOAD_DIR;
-
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * Extension of the file as the user originally uploaded.
@@ -55,11 +51,6 @@ class Picture
      * @var string
      */
     private $tempFileName;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getExtension(): ?string
     {
