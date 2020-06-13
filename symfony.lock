@@ -1,6 +1,78 @@
 {
+    "doctrine/data-fixtures": {
+        "version": "1.4.2"
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "fc52d86631a6dfd9fdf3381d0b7e3df2069e51b3"
+        },
+        "files": [
+            "./src/DataFixtures/AppFixtures.php"
+        ]
+    },
+    "jdorn/sql-formatter": {
+        "version": "v1.2.17"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.3"
+    },
     "php": {
         "version": "7.4"
+    },
+    "phpstan/phpstan": {
+        "version": "0.12.25"
+    },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "71599f5b0fdeeeec0fb90e9b17c85e6f5e1350c1"
+        },
+        "files": [
+            "./public/.htaccess"
+        ]
+    },
+    "symfony/asset": {
+        "version": "v5.0.8"
+    },
+    "symfony/form": {
+        "version": "v5.0.8"
+    },
+    "symfony/inflector": {
+        "version": "v5.0.8"
+    },
+    "symfony/intl": {
+        "version": "v5.0.8"
+    },
+    "symfony/options-resolver": {
+        "version": "v5.0.8"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "6d0e35f749d5f4bfe1f011762875275cd3f9874f"
+        },
+        "files": [
+            "./.env.test",
+            "./bin/phpunit",
+            "./phpunit.xml.dist",
+            "./tests/bootstrap.php"
+        ]
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.17.0"
+    },
+    "symfony/property-access": {
+        "version": "v5.0.8"
     },
     "symfony/security-bundle": {
         "version": "4.4",
@@ -14,10 +86,32 @@
             "./config/packages/security.yaml"
         ]
     },
+    "symfony/security-core": {
+        "version": "v5.0.8"
+    },
+    "symfony/security-csrf": {
+        "version": "v5.0.8"
+    },
     "symfony/security-guard": {
         "version": "v5.0.8"
     },
     "symfony/security-http": {
         "version": "v5.0.8"
+    },
+    "symfony/validator": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "d902da3e4952f18d3bf05aab29512eb61cabd869"
+        },
+        "files": [
+            "./config/packages/test/validator.yaml",
+            "./config/packages/validator.yaml"
+        ]
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     }
 }
