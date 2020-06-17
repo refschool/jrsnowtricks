@@ -24,16 +24,6 @@ header
     align-items: baseline;
 }
 
-nav
-{
-    width: 500px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-}
-
 main
 {
     width: 100%;
@@ -45,10 +35,6 @@ main
     background-repeat: no-repeat;
 }
 
-footer {
-    grid-area: ft;
-}
-
 .app-computer {
     display: none;
 }
@@ -57,10 +43,7 @@ footer {
     display: inherit;
 }
 
-.footer {
-    display: none;
-}
-
+/* Here for large screens like computer */
 @media (min-width: 1280px)
 {
     body {
@@ -71,18 +54,19 @@ footer {
                 "ft";
     }
 
+    footer {
+        grid-area: ft;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 0.90rem;
+    }
+
     .app-computer {
         display: inherit;
     }
 
     .app-mobile {
         display: none;
-    }
-
-    .footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        font-size: 0.90rem;
     }
 }
