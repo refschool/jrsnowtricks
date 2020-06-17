@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Figure;
 use App\Form\FigureType;
 use App\Repository\FigureRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,7 @@ class FigureController extends AbstractController
 
     /**
      * @Route("/new", name="figure_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request): Response
     {
@@ -60,6 +62,7 @@ class FigureController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="figure_edit", methods={"GET","POST"}, requirements={"id":"\d+"})
+     * @IsGranted("ROLE_USER")
      */
     public function edit(Request $request, Figure $figure): Response
     {
@@ -80,6 +83,7 @@ class FigureController extends AbstractController
 
     /**
      * @Route("/{id}", name="figure_delete", methods={"DELETE"}, requirements={"id":"\d+"})
+     * @IsGranted("ROLE_USER")
      */
     public function delete(Request $request, Figure $figure): Response
     {
@@ -90,20 +94,5 @@ class FigureController extends AbstractController
         }
 
         return $this->redirectToRoute('figure_index');
-    }
-
-    public function videoAdd()
-    {
-        return $this->json('ok');
-    }
-
-    public function pictureAdd()
-    {
-        return $this->json('ok');
-    }
-
-    public function pictureRemove()
-    {
-        return $this->json('ok');
     }
 }
