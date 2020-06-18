@@ -58,7 +58,11 @@
             </ul>
         </header>
 
-        <main class="container-fluid row justify-content-center">
+        <nav>
+            {# TODO : déplacer le menu mobile ici. #}
+        </nav>
+
+        <main class="container-fluid row justify-content-center" id="main">
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
                 {{ message }}

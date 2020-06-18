@@ -6,10 +6,13 @@
     <div class="row align-items-center" style="height: 1080px">
         <div class="col-12 text-center">
             <h1 class="font-weight-bold" style="color:red;">Venez trouver votre style</h1>
+            <a href="#index" class="rounded-circle btn btn-danger">
+                <i class="fas fa-arrow-down"></i>
+            </a>
         </div>
     </div>
 
-    <div class="row py-5 mx-3">
+    <section class="row py-5 mx-3" id="index">
         {% for figure in figures %}
             <div class="col-sm-2">
                 <div class="card">
@@ -32,5 +35,5 @@
                 <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
-    </div>
+    </section>
 {% endblock %}
