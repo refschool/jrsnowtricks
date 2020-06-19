@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\traits\EntityIdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -11,28 +12,29 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class Picture
 {
+    use EntityIdTrait;
+
     const UPLOAD_DIR = 'uploads/img';
 
     const UPLOAD_ROOT_DIR = __DIR__.'/../../public/'.self::UPLOAD_DIR;
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
+     * Extension of the file as the user originally uploaded.
+     *
      * @ORM\Column(type="string", length=5)
      */
     private $extension;
 
     /**
+     * Alternative text associated to the img markup. Originally the name of the file the user uploaded.
+     *
      * @ORM\Column(type="string", length=50)
      */
     private $alt;
 
     /**
+     * Figure's post this picture is related to.
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="pictures")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -44,16 +46,11 @@ class Picture
     private $file;
 
     /**
-     * Simple buffer
+     * Simple buffer variable in order to manage the filename during upload.
      *
      * @var string
      */
     private $tempFileName;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getExtension(): ?string
     {
@@ -124,7 +121,7 @@ class Picture
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function preUpload(): void
+    public function preUploadFile(): void
     {
         if (!$this->file) {
             return;
@@ -138,7 +135,7 @@ class Picture
      * @ORM\PostPersist
      * @ORM\PostUpdate
      */
-    public function upload(): void
+    public function uploadFile(): void
     {
         if (!$this->file) {
             return;
@@ -152,5 +149,23 @@ class Picture
         }
 
         $this->file->move(self::UPLOAD_ROOT_DIR, $this->id.'.'.$this->extension);
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function preRemoveFile(): void
+    {
+        $this->tempFileName = $this->id.'.'.$this->extension;
+    }
+
+    /**
+     * @ORM\PostRemove
+     */
+    public function removeFile(): void
+    {
+        if (file_exists(self::UPLOAD_ROOT_DIR.'/'.$this->tempFileName)) {
+            unlink(self::UPLOAD_ROOT_DIR.'/'.$this->tempFileName);
+        }
     }
 }

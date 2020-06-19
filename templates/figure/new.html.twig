@@ -1,15 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Figure{% endblock %}
+{% block title %}Nouvelle Figure{% endblock %}
 
-{% block body %}
-    <h1>Create new Figure</h1>
+{% block main %}
+    <div class="row justify-content-center">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ asset('assets/images/card-default.jpg') }}" alt="test" class="img-responsive">
+                </div>
+                <div class="carousel-caption">
+                    <h1>Créer une nouvelle figure</h1>
+                </div>
+            </div>
+        </div>
 
-    {{ include('figure/_form.html.twig') }}
+        <div class="col-12">
+            <h3>Images et vidéos</h3>
+            <div class="row">
+                <div class="col-12">
+                    <p>Il n'y a pas encore d'images ou de vidéos pour illustrer cette figure.</p>
+                </div>
+            </div>
+        </div>
 
-    <a href="{{ path('figure_index') }}">back to list</a>
-{% endblock %}
+        <div class="col-sm-8">
+            <h3>Informations sur la figure</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">Nom</th>
+                        <th class="text-center">Catégorie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center"> {{ form_widget(form.name) }}</td>
+                        <td class="text-center"> {{ form_widget(form.category) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-{% block javascripts %}
-    <script src="{{ asset('assets/javascripts/pictures.js') }}"></script>
+        <div class="col-10">
+            <h3>Description de la figure</h3>
+            <div class="border border-dark">
+                {{ form_widget(form.description) }}
+            </div>
+        </div>
+
+        <div class="d-flex col-10">
+            <div class="mr-auto p-2">
+                <a href="{{ path('figure_index') }}" class="btn btn-dark">Annuler</a>
+            </div>
+            <div class="p-2">
+                <button class="btn btn-success">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

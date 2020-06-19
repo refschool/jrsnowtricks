@@ -1,0 +1,72 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: grid;
+    min-height: 100%;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 60px;
+    grid-gap: 2px;
+    grid-template-areas:
+            "mn"
+            "hd";
+}
+
+header
+{
+    padding: 10px;
+    grid-area: hd;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+main
+{
+    width: 100%;
+    min-height: auto;
+    grid-area: mn;
+    background-image: url('/assets/images/Snowtricks-background.jpg');
+    background-size: auto;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+.app-computer {
+    display: none;
+}
+
+.app-mobile {
+    display: inherit;
+}
+
+/* Here for large screens like computer */
+@media (min-width: 1280px)
+{
+    body {
+        grid-template-rows: 50px 1fr 50px;
+        grid-template-areas:
+                "hd"
+                "mn"
+                "ft";
+    }
+
+    footer {
+        grid-area: ft;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 0.90rem;
+    }
+
+    .app-computer {
+        display: inherit;
+    }
+
+    .app-mobile {
+        display: none;
+    }
+}

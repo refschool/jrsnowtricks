@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
+use App\Entity\traits\EntityIdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
@@ -15,12 +15,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
  */
 class Figure
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use EntityIdTrait;
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
@@ -49,7 +44,7 @@ class Figure
      */
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="figure", cascade={"persist", "remove"},  orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="figure", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $pictures;
 
@@ -58,15 +53,20 @@ class Figure
      */
     private $videos;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastModified;
+
     public function __construct()
     {
         $this->videos = new ArrayCollection();
         $this->pictures = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getName(): ?string
@@ -103,11 +103,6 @@ class Figure
         $this->slug = $slug;
 
         return $this;
-    }
-
-    public function sluggify(SluggerInterface $slugger)
-    {
-        $this->slug = (string) $slugger->slug($this->name)->lower();
     }
 
     /**
@@ -190,6 +185,30 @@ class Figure
                 $picture->setFigure(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getLastModified(): ?\DateTimeInterface
+    {
+        return $this->lastModified;
+    }
+
+    public function setLastModified(?\DateTimeInterface $lastModified): self
+    {
+        $this->lastModified = $lastModified;
 
         return $this;
     }

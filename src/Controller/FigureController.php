@@ -5,14 +5,13 @@ namespace App\Controller;
 use App\Entity\Figure;
 use App\Form\FigureType;
 use App\Repository\FigureRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/figure")
- */
+/** @Route("/") */
 class FigureController extends AbstractController
 {
     /**
@@ -27,14 +26,15 @@ class FigureController extends AbstractController
 
     /**
      * @Route("/new", name="figure_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request): Response
     {
-        $figure = new Figure();
-        $form = $this->createForm(FigureType::class, $figure);
-        $form->handleRequest($request);
+        $form = $this->createForm(FigureType::class);
 
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $figure = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figure);
             $entityManager->flush();
@@ -44,13 +44,12 @@ class FigureController extends AbstractController
         }
 
         return $this->render('figure/new.html.twig', [
-            'figure' => $figure,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="figure_show", methods={"GET"})
+     * @Route("/{id}", name="figure_show", methods={"GET"}, requirements={"id":"\d+"})
      */
     public function show(Figure $figure): Response
     {
@@ -60,7 +59,8 @@ class FigureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="figure_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="figure_edit", methods={"GET","POST"}, requirements={"id":"\d+"})
+     * @IsGranted("ROLE_USER")
      */
     public function edit(Request $request, Figure $figure): Response
     {
@@ -80,7 +80,8 @@ class FigureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="figure_delete", methods={"DELETE"})
+     * @Route("/{id}", name="figure_delete", methods={"DELETE"}, requirements={"id":"\d+"})
+     * @IsGranted("ROLE_USER")
      */
     public function delete(Request $request, Figure $figure): Response
     {
